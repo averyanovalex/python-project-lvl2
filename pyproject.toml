@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "hexlet-code"
+version = "0.1.0"
+description = "Training project 'Difference calculator' on hexlet.io"
+authors = ["Alexey Averyanov <averyanovalexey@gmail.com>"]
+classifiers = [
+    "Programming Language :: Python :: 3.8",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+packages = [
+  { include = "gen_diff"},
+]
+
+[tool.poetry.scripts]
+gendiff = "gen_diff.scripts.gen_diff:main"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+[tool.poetry.dev-dependencies]
+wemake-python-styleguide = "^0.16.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
