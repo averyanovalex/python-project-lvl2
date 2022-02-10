@@ -18,6 +18,7 @@ gendiff = "gen_diff.scripts.gen_diff:main"
 
 [tool.poetry.dependencies]
 python = "^3.8"
+argparse = "^1.4.0"
 
 [tool.poetry.dev-dependencies]
 wemake-python-styleguide = "^0.16.0"
