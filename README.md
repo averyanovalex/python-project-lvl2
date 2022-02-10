@@ -3,7 +3,7 @@
 [![example workflow](https://github.com/averyanovalex/python-project-lvl2/actions/workflows/ci.yml/badge.svg)](https://github.com/averyanovalex/python-project-lvl2/actions/workflows/ci.yml)
 
 
-# Training project "Difference calculator" on hexlet.io
+# Training project "Difference generator" on hexlet.io
 
 ## Links
 
