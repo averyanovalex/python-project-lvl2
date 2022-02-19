@@ -23,5 +23,8 @@ check: lint test
 gendiff:
 	poetry run gendiff
 
+gendiff_json:
+	poetry run gendiff 	'tests/fixtures/file1.json' 'tests/fixtures/file2.json'
+
 
 .PHONY: gendiff

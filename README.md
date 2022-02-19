@@ -12,3 +12,8 @@ This project was built using these tools:
 | Tool                                                                        | Description                                        |
 |-----------------------------------------------------------------------------|----------------------------------------------------|
 | [poetry](https://poetry.eustace.io/)                                        | "Python dependency management packaging made easy" |
+
+
+
+## How it works
+[![asciicast](https://asciinema.org/a/tYKB33ydwG1KVI1MQL78yNkx7.svg)](https://asciinema.org/a/tYKB33ydwG1KVI1MQL78yNkx7)
