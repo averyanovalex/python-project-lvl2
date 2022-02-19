@@ -10,11 +10,11 @@ classifiers = [
 ]
 
 packages = [
-  { include = "gen_diff"},
+  { include = "gendiff"},
 ]
 
 [tool.poetry.scripts]
-gendiff = "gen_diff.scripts.gen_diff:main"
+gendiff = "gendiff.scripts.gendiff:main"
 
 [tool.poetry.dependencies]
 python = "^3.8"
@@ -22,6 +22,7 @@ argparse = "^1.4.0"
 
 [tool.poetry.dev-dependencies]
 wemake-python-styleguide = "^0.16.0"
+pytest = "^7.0.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
