@@ -7,7 +7,7 @@ on:
     tags:
       - '**'
   pull_request:
-    types: [ all ]
+    types: [ assigned, opened, synchronize, reopened ]
       
 jobs:
   build:
