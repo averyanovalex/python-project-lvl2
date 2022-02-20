@@ -18,8 +18,8 @@ test: # run tests
 	clear
 	poetry run pytest -vv
 
-check: lint # run linter and tests
-	clear
+check: # run linter and tests
+	poetry run flake8 gendiff tests
 	poetry run pytest
 
 gendiff: # run gendiff without arguments
