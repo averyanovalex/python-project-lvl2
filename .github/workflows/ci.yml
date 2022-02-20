@@ -6,6 +6,8 @@ on:
       - 'main'
     tags:
       - '**'
+  pull_request:
+    types: [ assigned, opened, synchronize, reopened ]
       
 jobs:
   build:
