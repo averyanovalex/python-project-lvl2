@@ -6,6 +6,8 @@ on:
       - 'main'
     tags:
       - '**'
+  pull_request:
+    types: [ labeled ]
       
 jobs:
   build:
