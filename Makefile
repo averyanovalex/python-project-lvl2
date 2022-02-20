@@ -20,7 +20,10 @@ test: # run tests
 
 check: # run linter and tests
 	poetry run flake8 gendiff tests
-	poetry run pytest
+	poetry run pytest --cov=gendiff tests/ --cov-report xml
+	
+cov: # show tests coverage report
+	poetry run coverage report
 
 gendiff: # run gendiff without arguments
 	poetry run gendiff

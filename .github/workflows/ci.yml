@@ -8,7 +8,7 @@ on:
       - '**'
   pull_request:
     types: [ assigned, opened, synchronize, reopened ]
-      
+    
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -27,6 +27,10 @@ jobs:
         run: |
           pip install poetry
           make install  
+          wget -O cc-test-reporter "https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64"
+          chmod +x cc-test-reporter
       - name: Run linter and pytest
         run: |
+          poetry run ./cc-test-reporter before-build
           make check
+          poetry run ./cc-test-reporter after-build -r 48a6fdf13fd8747813f733fd325f66d1ad9476486c9151e60f278baa7b337781
