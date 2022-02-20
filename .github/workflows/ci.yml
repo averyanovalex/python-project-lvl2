@@ -1,4 +1,4 @@
-name: CI-linter-tests
+name: CI (linter & tests)
 on: push
 jobs:
   build:
