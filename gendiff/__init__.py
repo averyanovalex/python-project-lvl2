@@ -18,7 +18,7 @@ def generate_diff(file_path1: str, file_path2: str) -> None:
     json1 = load_json(file_path1)
     json2 = load_json(file_path2)
 
-    keys = get_all_keys_from_dict(json1, json2)
+    keys = get_keys_from_dict(json1, json2)
 
     return generate_diff_between_two_json(keys, json1, json2)
 
@@ -38,7 +38,7 @@ def load_json(file_path: str) -> dict:
     return json_as_dict
 
 
-def get_all_keys_from_dict(*dicts: dict) -> list:
+def get_keys_from_dict(*dicts: dict) -> list:
     """
     Return all unique keys from multiple dictionaries.
 
@@ -74,8 +74,8 @@ def generate_diff_between_two_json(keys: list, dict1: dict, dict2: dict) -> str:
         value1 = dict1.get(key)
         value2 = dict2.get(key)
 
-        value1 = lower_case_bool_value(value1)
-        value2 = lower_case_bool_value(value2)
+        value1 = convert_bool_to_str(value1)
+        value2 = convert_bool_to_str(value2)
 
         if value1 == value2:
             diff_str = '{0}    {1}: {2}\n'.format(diff_str, key, value1)
@@ -90,7 +90,7 @@ def generate_diff_between_two_json(keys: list, dict1: dict, dict2: dict) -> str:
     return ''.join(['{\n', diff_str, '}'])
 
 
-def lower_case_bool_value(parameter: Any) -> Any:
+def convert_bool_to_str(parameter: Any) -> Any:
     """
     Convert bool values to str in lower case.
 
