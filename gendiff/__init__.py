@@ -1,41 +1,23 @@
 """Init module."""
 
-import json
-from typing import Any
+from gendiff.parse import convert_bool_to_str
 
 
-def generate_diff(file_path1: str, file_path2: str) -> None:
+def generate_diff(dict1: str, dict2: str) -> None:
     """
-    Generate differences between two json files.
+    Generate differences between two dictionaries files.
 
     Args:
-        file_path1: first files's path
-        file_path2: second files's path
+        dict1: first dictionary
+        dict2: second dictionary
 
     Returns:
         str
     """
-    json1 = load_json(file_path1)
-    json2 = load_json(file_path2)
 
-    keys = get_keys_from_dict(json1, json2)
+    keys = get_keys_from_dict(dict1, dict2)
 
-    return generate_diff_between_two_json(keys, json1, json2)
-
-
-def load_json(file_path: str) -> dict:
-    """
-    Load json from text file.
-
-    Args:
-        file_path: path to text file
-
-    Returns:
-        dict
-    """
-    with open(file_path) as file1:
-        json_as_dict = json.load(file1)
-    return json_as_dict
+    return generate_diff_between_two_json(keys, dict1, dict2)
 
 
 def get_keys_from_dict(*dicts: dict) -> list:
@@ -88,19 +70,3 @@ def generate_diff_between_two_json(keys: list, dict1: dict, dict2: dict) -> str:
             diff_str = '{0}  + {1}: {2}\n'.format(diff_str, key, value2)
 
     return ''.join(['{\n', diff_str, '}'])
-
-
-def convert_bool_to_str(parameter: Any) -> Any:
-    """
-    Convert bool values to str in lower case.
-
-    Convert bool values True and False to string 'true' and 'false',
-    otherwise return initial value
-
-    Args:
-        parameter: value in any type
-
-    Returns:
-        Any
-    """
-    return str(parameter).lower() if isinstance(parameter, bool) else parameter
