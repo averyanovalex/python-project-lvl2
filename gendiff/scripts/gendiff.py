@@ -4,7 +4,7 @@
 import argparse
 
 from gendiff import generate_diff
-from gendiff.parse import parse
+from gendiff.parse import parse as parse_file
 
 
 def main() -> None:
@@ -20,9 +20,9 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    first_file = parse(args.first_file, args.format)
-    second_file = parse(args.second_file, args.format)
-    print(generate_diff(first_file, second_file))
+    file1 = parse_file(args.first_file)
+    file2 = parse_file(args.second_file)
+    print(generate_diff(file1, file2))
 
 
 if __name__ == '__main__':

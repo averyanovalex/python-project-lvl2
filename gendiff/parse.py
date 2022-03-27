@@ -1,19 +1,33 @@
 """Tools for parsing."""
 
-import json, yaml
-from typing import Any
+import json
+import os
+
+import yaml
 
 
-def parse(file_path: str, format: str = None) -> dict:
+def parse(file_path: str) -> dict:
+    """
+    Parse file to dict. Support json, yaml.
+
+    Args:
+        file_path: path to text file
+
+    Returns:
+        dict
+    """
     suported_formats = {
-                        None: parse_json,
-                        'json': parse_json,
-                        'yaml': parse_yaml,
-                        'yml': parse_yaml
-                        }
+        None: parse_json,
+        '.json': parse_json,
+        '.yaml': parse_yaml,
+        '.yml': parse_yaml,
+    }
 
-    parse_function = suported_formats[format]
-    return parse_function(file_path)
+    _, file_extension = os.path.splitext(file_path)
+    parse_function = suported_formats[file_extension]
+
+    file_data = parse_function(file_path)
+    return dict(map(convert_bool_value_to_str, file_data.items()))
 
 
 def parse_json(file_path: str) -> dict:
@@ -32,26 +46,38 @@ def parse_json(file_path: str) -> dict:
 
 
 def parse_yaml(file_path: str) -> dict:
+    """
+    Parse yaml from text file.
+
+    Args:
+        file_path: path to text file
+
+    Returns:
+        dict
+    """
     with open(file_path) as stream:
         yaml_as_dict = yaml.safe_load(stream)
 
     if yaml_as_dict is None:
-        yaml_as_dict = {} 
+        yaml_as_dict = {}
 
     return yaml_as_dict
 
 
-def convert_bool_to_str(parameter: Any) -> Any:
+def convert_bool_value_to_str(dict_item: tuple) -> tuple:
     """
-    Convert bool values to str in lower case.
+    Convert bool values in dictionary's item to str in lower case.
 
-    Convert bool values True and False to string 'true' and 'false',
+    Convert bool values in True and False to string 'true' and 'false',
     otherwise return initial value
 
     Args:
-        parameter: value in any type
+        dict_item: dictionary's item (tuple)
 
     Returns:
-        Any
+        tuple (dictionary's item)
     """
-    return str(parameter).lower() if isinstance(parameter, bool) else parameter
+    dict_key, dict_value = dict_item
+    if isinstance(dict_value, bool):
+        dict_value = str(dict_value).lower()
+    return dict_key, dict_value
