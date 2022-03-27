@@ -6,15 +6,20 @@ from gendiff.parse import parse as parse_file
 file1_json = 'tests/fixtures/file1.json'
 file2_json = 'tests/fixtures/file2.json'
 file_empty_json = 'tests/fixtures/file_empty.json'
+file1_complex_json = 'tests/fixtures/file_complex1.json'
+file2_complex_json = 'tests/fixtures/file_complex2.json'
 
 file1_yaml = 'tests/fixtures/file1.yaml'
 file2_yaml = 'tests/fixtures/file2.yaml'
 file_empty_yaml = 'tests/fixtures/file_empty.yaml'
+file1_complex_yaml = 'tests/fixtures/file_complex1.yaml'
+file2_complex_yaml = 'tests/fixtures/file_complex2.yaml'
 
-result_both_full = 'tests/fixtures/result_both_full.txt'
-result_one_empty = 'tests/fixtures/result_one_empty.txt'
-result_both_equal = 'tests/fixtures/result_both_equal.txt'
-result_both_empty = 'tests/fixtures/result_both_empty.txt'
+result_both_full = 'tests/fixtures/result_simple_both_full.txt'
+result_one_empty = 'tests/fixtures/result_simple_one_empty.txt'
+result_both_equal = 'tests/fixtures/result_simple_both_equal.txt'
+result_both_empty = 'tests/fixtures/result_simple_both_empty.txt'
+result_both_full_complex = 'tests/fixtures/result_complex_both_full.txt'
 
 
 def run_test_gendiff(
@@ -90,6 +95,19 @@ def test_gendiff_json_both_empty() -> None:
     )
 
 
+def test_gendiff_json_both_full_complex() -> None:
+    """
+    Tests generate_diff when both arguments are json files (complex structure).
+
+    Both files are full and different.
+    """
+    run_test_gendiff(
+        result_path=result_both_full_complex,
+        file1_path=file1_complex_json,
+        file2_path=file2_complex_json,
+    )
+
+
 def test_gendiff_yaml_both_full() -> None:
     """
     Tests generate_diff when both arguments are yaml files.
@@ -139,4 +157,17 @@ def test_gendiff_yaml_both_empty() -> None:
         result_path=result_both_empty,
         file1_path=file_empty_yaml,
         file2_path=file_empty_yaml,
+    )
+
+
+def test_gendiff_yaml_both_full_complex() -> None:
+    """
+    Tests generate_diff when both arguments are yaml files (complex structure).
+
+    Both files are full and different.
+    """
+    run_test_gendiff(
+        result_path=result_both_full_complex,
+        file1_path=file1_complex_yaml,
+        file2_path=file2_complex_yaml,
     )
