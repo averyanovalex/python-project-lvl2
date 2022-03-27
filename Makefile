@@ -31,5 +31,8 @@ gendiff: # run gendiff without arguments
 gendiff_json: # run gendiff for 2 json files
 	poetry run gendiff 	'tests/fixtures/file1.json' 'tests/fixtures/file2.json'
 
+gendiff_yaml: # run gendiff for 2 yaml files
+	poetry run gendiff 	'tests/fixtures/file1.yaml' 'tests/fixtures/file2.yaml'  --format yaml
+
 
 .PHONY: gendiff

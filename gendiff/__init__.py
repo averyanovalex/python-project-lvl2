@@ -1,44 +1,23 @@
 """Init module."""
 
-import json
-from typing import Any
 
-
-def generate_diff(file_path1: str, file_path2: str) -> None:
+def generate_diff(dict1: str, dict2: str) -> None:
     """
-    Generate differences between two json files.
+    Generate differences between two dictionaries.
 
     Args:
-        file_path1: first files's path
-        file_path2: second files's path
+        dict1: first dictionary
+        dict2: second dictionary
 
     Returns:
         str
     """
-    json1 = load_json(file_path1)
-    json2 = load_json(file_path2)
+    keys = get_keys_from_dicts(dict1, dict2)
 
-    keys = get_all_keys_from_dict(json1, json2)
-
-    return generate_diff_between_two_json(keys, json1, json2)
+    return generate_diff_between_two_json(keys, dict1, dict2)
 
 
-def load_json(file_path: str) -> dict:
-    """
-    Load json from text file.
-
-    Args:
-        file_path: path to text file
-
-    Returns:
-        dict
-    """
-    with open(file_path) as file1:
-        json_as_dict = json.load(file1)
-    return json_as_dict
-
-
-def get_all_keys_from_dict(*dicts: dict) -> list:
+def get_keys_from_dicts(*dicts: dict) -> list:
     """
     Return all unique keys from multiple dictionaries.
 
@@ -74,9 +53,6 @@ def generate_diff_between_two_json(keys: list, dict1: dict, dict2: dict) -> str:
         value1 = dict1.get(key)
         value2 = dict2.get(key)
 
-        value1 = lower_case_bool_value(value1)
-        value2 = lower_case_bool_value(value2)
-
         if value1 == value2:
             diff_str = '{0}    {1}: {2}\n'.format(diff_str, key, value1)
         elif value1 is None:
@@ -88,19 +64,3 @@ def generate_diff_between_two_json(keys: list, dict1: dict, dict2: dict) -> str:
             diff_str = '{0}  + {1}: {2}\n'.format(diff_str, key, value2)
 
     return ''.join(['{\n', diff_str, '}'])
-
-
-def lower_case_bool_value(parameter: Any) -> Any:
-    """
-    Convert bool values to str in lower case.
-
-    Convert bool values True and False to string 'true' and 'false',
-    otherwise return initial value
-
-    Args:
-        parameter: value in any type
-
-    Returns:
-        Any
-    """
-    return str(parameter).lower() if isinstance(parameter, bool) else parameter

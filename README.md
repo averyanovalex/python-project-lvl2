@@ -18,4 +18,8 @@ This project was built using these tools:
 
 
 ## How it works
+### diff json files
 [![asciicast](https://asciinema.org/a/tYKB33ydwG1KVI1MQL78yNkx7.svg)](https://asciinema.org/a/tYKB33ydwG1KVI1MQL78yNkx7)
+
+### diff yaml files
+[![asciicast](https://asciinema.org/a/lgdulDWM39LJJjfgLcb6rr3VZ.svg)](https://asciinema.org/a/lgdulDWM39LJJjfgLcb6rr3VZ)
