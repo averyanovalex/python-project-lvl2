@@ -45,7 +45,7 @@ def test_gendiff_json_both_full() -> None:
     Both files are full and different.
     """
     run_test_gendiff(
-        result=result_both_full,
+        result_path=result_both_full,
         file1_path=file1_json,
         file2_path=file2_json,
     )
@@ -58,7 +58,7 @@ def test_gendiff_json_one_empty() -> None:
     Fisrt file is empty, second file is full.
     """
     run_test_gendiff(
-        result=result_one_empty,
+        result_path=result_one_empty,
         file1_path=file_empty_json,
         file2_path=file2_json,
     )
@@ -71,7 +71,7 @@ def test_gendiff_json_both_equal() -> None:
     Both files is equal.
     """
     run_test_gendiff(
-        result=result_both_equal,
+        result_path=result_both_equal,
         file1_path=file1_json,
         file2_path=file1_json,
     )
@@ -84,7 +84,7 @@ def test_gendiff_json_both_empty() -> None:
     Both file are empty.
     """
     run_test_gendiff(
-        result=result_both_empty,
+        result_path=result_both_empty,
         file1_path=file_empty_json,
         file2_path=file_empty_json,
     )
@@ -97,7 +97,7 @@ def test_gendiff_yaml_both_full() -> None:
     Both files are full and different.
     """
     run_test_gendiff(
-        result=result_both_full,
+        result_path=result_both_full,
         file1_path=file1_yaml,
         file2_path=file2_yaml,
     )
@@ -110,7 +110,7 @@ def test_gendiff_yaml_one_empty() -> None:
     Fisrt file is empty, second file is full.
     """
     run_test_gendiff(
-        result=result_one_empty,
+        result_path=result_one_empty,
         file1_path=file_empty_yaml,
         file2_path=file2_yaml,
     )
@@ -123,7 +123,7 @@ def test_gendiff_yaml_both_equal() -> None:
     Both files is equal.
     """
     run_test_gendiff(
-        result=result_both_equal,
+        result_path=result_both_equal,
         file1_path=file1_yaml,
         file2_path=file1_yaml,
     )
@@ -136,7 +136,7 @@ def test_gendiff_yaml_both_empty() -> None:
     Both file are empty.
     """
     run_test_gendiff(
-        result=result_both_empty,
+        result_path=result_both_empty,
         file1_path=file_empty_yaml,
         file2_path=file_empty_yaml,
     )
