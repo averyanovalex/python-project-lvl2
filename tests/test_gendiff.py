@@ -1,7 +1,7 @@
 """Module tests package gendiff for json  files."""
 
 from gendiff import generate_diff
-from gendiff.parse import parse as parse_file
+from gendiff.parse import parse_file
 
 file1_json = 'tests/fixtures/file1.json'
 file2_json = 'tests/fixtures/file2.json'

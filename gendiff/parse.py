@@ -6,7 +6,7 @@ import os
 import yaml
 
 
-def parse(file_path: str) -> dict:
+def parse_file(file_path: str) -> dict:
     """
     Parse file to dict. Support json, yaml.
 
@@ -81,3 +81,6 @@ def convert_bool_value_to_str(dict_item: tuple) -> tuple:
     if isinstance(dict_value, bool):
         dict_value = str(dict_value).lower()
     return dict_key, dict_value
+
+
+__all__ = ['parse_file']

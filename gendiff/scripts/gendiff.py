@@ -4,7 +4,7 @@
 import argparse
 
 from gendiff import generate_diff
-from gendiff.parse import parse as parse_file
+from gendiff.parse import parse_file
 
 
 def main() -> None:
