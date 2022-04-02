@@ -1,7 +1,7 @@
 """Generate difference."""
 
 
-def build_diff(dict1: str, dict2: str) -> str:
+def generate_diff_dicts(dict1: str, dict2: str) -> str:
     """
     Generate differences between two dictionaries.
 
@@ -14,7 +14,7 @@ def build_diff(dict1: str, dict2: str) -> str:
     """
     keys = get_keys_from_dicts(dict1, dict2)
 
-    return generate_diff_between_two_json(keys, dict1, dict2)
+    return build_diff(keys, dict1, dict2)
 
 
 def get_keys_from_dicts(*dicts: dict) -> list:
@@ -36,9 +36,9 @@ def get_keys_from_dicts(*dicts: dict) -> list:
     return keys
 
 
-def generate_diff_between_two_json(keys: list, dict1: dict, dict2: dict) -> str:
+def build_diff(keys: list, dict1: dict, dict2: dict) -> dict:
     """
-    Generate difference between two dictionaries and return as string.
+    Build difference between two dictionaries and return as dict.
 
     Args:
         keys: all keys from both dictionaries
@@ -46,24 +46,39 @@ def generate_diff_between_two_json(keys: list, dict1: dict, dict2: dict) -> str:
         dict2: second dictionary
 
     Returns:
-        str
+        dict
     """
-    diff_str = ''
+    diff = []
     for key in keys:
         value1 = dict1.get(key)
         value2 = dict2.get(key)
 
         if value1 == value2:
-            diff_str = '{0}    {1}: {2}\n'.format(diff_str, key, value1)
-        elif value1 is None:
-            diff_str = '{0}  + {1}: {2}\n'.format(diff_str, key, value2)
-        elif value2 is None:
-            diff_str = '{0}  - {1}: {2}\n'.format(diff_str, key, value1)
-        else:
-            diff_str = '{0}  - {1}: {2}\n'.format(diff_str, key, value1)
-            diff_str = '{0}  + {1}: {2}\n'.format(diff_str, key, value2)
+            diff.append(build_diff_item(key, value1, 'both_dicts'))
+            continue
 
-    return ''.join(['{\n', diff_str, '}'])
+        if value1 is not None:
+            diff.append(build_diff_item(key, value1, 'only_first_dict'))
+
+        if value2 is not None:
+            diff.append(build_diff_item(key, value2, 'only_second_dict'))
+
+    return diff
+
+
+def build_diff_item(item_key: str, item_value: str, value_in: str) -> dict:
+    """
+    Build difference item as dict.
+
+    Args:
+        item_key: field 'key'
+        item_value: field 'value'
+        value_in: field 'value_in'
+
+    Returns:
+        dict
+    """
+    return {'key': item_key, 'value': item_value, 'value_in': value_in}
 
 
 __all__ = ['build_diff']
