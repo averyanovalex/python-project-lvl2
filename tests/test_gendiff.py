@@ -1,7 +1,6 @@
 """Module tests package gendiff for json  files."""
 
 from gendiff import generate_diff
-from gendiff.parse import parse_file
 
 file1_json = 'tests/fixtures/file1.json'
 file2_json = 'tests/fixtures/file2.json'
@@ -37,10 +36,7 @@ def run_test_gendiff(
     """
     with open(result_path) as stream:
         estimated_result = stream.read()
-    file1 = parse_file(file1_path)
-    file2 = parse_file(file2_path)
-    print(file2)
-    assert generate_diff(file1, file2) == estimated_result
+    assert generate_diff(file1_path, file2_path) == estimated_result
 
 
 def test_gendiff_json_both_full() -> None:

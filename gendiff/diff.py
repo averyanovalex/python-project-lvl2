@@ -1,7 +1,7 @@
 """Generate difference."""
 
 
-def generate_diff(dict1: str, dict2: str) -> None:
+def build_diff(dict1: str, dict2: str) -> str:
     """
     Generate differences between two dictionaries.
 
@@ -66,4 +66,4 @@ def generate_diff_between_two_json(keys: list, dict1: dict, dict2: dict) -> str:
     return ''.join(['{\n', diff_str, '}'])
 
 
-__all__ = ['generate_diff']
+__all__ = ['build_diff']
