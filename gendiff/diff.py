@@ -81,4 +81,4 @@ def build_diff_item(item_key: str, item_value: str, value_in: str) -> dict:
     return {'key': item_key, 'value': item_value, 'value_in': value_in}
 
 
-__all__ = ['build_diff']
+__all__ = ['generate_diff_dicts']
