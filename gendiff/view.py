@@ -1,46 +1,37 @@
 """Generate view."""
 
 
-def generate_view(difference: list, tab="") -> str:
+def generate_view(difference: list, indent="") -> str:
 
-    result = ''
-    result = result + '{\n'
+    result = '{\n'
     for item in difference:
-        assert isinstance(item, dict), 'not dict!'
 
         key = item.get('key')
         value = item.get('value')
         diff_type = item.get('diff_type')
         children = item.get('children')
 
-        # if key in {'common'}:
-        #     continue
-        
-        # print('item:')
-        # print(item)
-
-        if diff_type == 'added':
-            mark_tab = tab + '  + '
-        elif diff_type == 'removed':
-            mark_tab = tab + '  - '
-        else:
-            mark_tab = tab + '    '
-        blank_tab = tab + '    '
-        
-        
+        marked_indent = f'{indent}{get_marked_indent(diff_type)}'  
+        indent_next_level = f'{indent}    '
+              
         if isinstance(value, dict):
-            result = result + mark_tab + key + ': ' + show_value_dict(value, blank_tab) + '\n'
+            value_view = show_value_dict(value, indent_next_level)
         elif children is not None:
-            result = result + mark_tab + key + ': ' + generate_view(children, blank_tab) + '\n'    
+            value_view = generate_view(children, indent_next_level)
         else:
-            result = result + mark_tab + key + ': ' + str(value) + '\n'
+            value_view = str(value)       
+        result = f'{result}{marked_indent}{key}: {value_view}\n'
 
+    return f'{result}{indent}}}'
         
 
+def get_marked_indent(diff_type):
+    if diff_type == 'added':
+        return '  + '   
+    if diff_type == 'removed':
+        return '  - '
+    return '    '
 
-    result = result + tab + '}'
-    return result
-        
 
 def show_value_dict(dict_: dict, tab):
     result = '{\n'
@@ -54,44 +45,6 @@ def show_value_dict(dict_: dict, tab):
     result = result + tab + '}'
     return result
 
-
-        
-
-
-def _generate_view(difference: list) -> str:
-    """
-    Generate comfortable view for difference.
-
-    Args:
-        difference: difference between files
-
-    Returns:
-        str
-    """
-    text = '\n'.join(map(build_diff_item_view, difference))
-    if text == '':
-        return '{\n}'
-    return ''.join(['{\n', text, '\n}'])
-
-
-def _build_diff_item_view(diff_item: dict) -> list:
-    """
-    Build view for difference item.
-
-    Args:
-        diff_item: difference item
-
-    Returns:
-        str
-    """
-    marks = {
-        'both_dicts': ' ',
-        'only_first_dict': '-',
-        'only_second_dict': '+',
-    }
-
-    mark = marks[diff_item['value_in']]
-    return '  {0} {1}: {2}'.format(mark, diff_item['key'], diff_item['value'])
 
 
 __all__ = ['generate_view']
