@@ -20,7 +20,7 @@ test: # run tests
 
 onetest: # run one tests
 	clear
-	poetry run pytest tests/test_gendiff.py::test_gendiff_json_both_full_complex
+	poetry run pytest tests/test_gendiff.py::test_gendiff_yaml_both_full_complex
 
 check: # run linter and tests
 	poetry run flake8 gendiff tests
@@ -39,7 +39,9 @@ gendiff_json_complex: # run gendiff for 2 json files (complex structure)
 	poetry run gendiff 	'tests/fixtures/file_complex1.json' 'tests/fixtures/file_complex2.json'
 
 gendiff_yaml: # run gendiff for 2 yaml files
-	poetry run gendiff 	'tests/fixtures/file1.yaml' 'tests/fixtures/file2.yaml'  --format yaml
+	poetry run gendiff 	'tests/fixtures/file1.yaml' 'tests/fixtures/file2.yaml'
 
+gendiff_yaml_complex: # run gendiff for 2 yaml files
+	poetry run gendiff 	'tests/fixtures/file_complex1.yaml' 'tests/fixtures/file_complex2.yaml'
 
 .PHONY: gendiff

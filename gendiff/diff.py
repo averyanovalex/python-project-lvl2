@@ -23,16 +23,15 @@ def generate_diff_dicts(dict1: str, dict2: str) -> str:
             continue
 
         if value1 == value2:
-            diff.append(build_least(key, value1, 'both_dicts'))
+            diff.append(build_least(key, value1, 'equal'))
             continue
 
         if value1 is not None:
-            diff.append(build_least(key, value1, 'only_first_dict'))
+            diff.append(build_least(key, value1, 'removed'))
 
         if value2 is not None:
-            diff.append(build_least(key, value2, 'only_second_dict'))
+            diff.append(build_least(key, value2, 'added'))
 
-    print(diff)
     return diff
 
 
@@ -55,19 +54,19 @@ def get_keys_from_dicts(*dicts: dict) -> list:
     return keys
 
 
-def build_least(item_key: str, item_value: str, value_in: str) -> dict:
+def build_least(item_key: str, item_value: str, diff_type: str) -> dict:
     """
     Build difference item as dict.
 
     Args:
-        item_key: field 'key'
-        item_value: field 'value'
-        value_in: field 'value_in'
+        item_key: key
+        item_value: value
+        diff_type: type of difference (equal, added, removed)
 
     Returns:
         dict
     """
-    return {'key': item_key, 'value': item_value, 'value_in': value_in}
+    return {'key': item_key, 'value': item_value, 'diff_type': diff_type}
 
 
 def build_node(item_key: str, children: list) -> dict:
