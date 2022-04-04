@@ -1,50 +1,118 @@
 """Generate view."""
 
 
-def generate_view(difference: list, indent="") -> str:
+def generate_view(difference: list) -> str:
+    """
+    Generate view for difference.
 
-    result = '{\n'
-    for item in difference:
+    Difference between two files has an internal representation.
+    This function generate visual representation for user.
 
-        key = item.get('key')
-        value = item.get('value')
-        diff_type = item.get('diff_type')
-        children = item.get('children')
+    Args:
+        difference: difference between two files
 
-        marked_indent = f'{indent}{get_marked_indent(diff_type)}'  
-        indent_next_level = f'{indent}    '
-              
-        if isinstance(value, dict):
-            value_view = show_value_dict(value, indent_next_level)
-        elif children is not None:
-            value_view = generate_view(children, indent_next_level)
-        else:
-            value_view = str(value)       
-        result = f'{result}{marked_indent}{key}: {value_view}\n'
+    Returns:
+        str
+    """
+    return build_view_for_children(difference)
 
-    return f'{result}{indent}}}'
-        
 
-def get_marked_indent(diff_type):
+def build_view_for_children(nodes: list, indent: str = '') -> str:
+    """
+    Build view for list of difference nodes.
+
+    Function called recursively.
+
+    Args:
+        nodes: list of difference nodes
+        indent: indent for current depth's level
+
+    Returns:
+        str
+    """
+    result_view = '{\n'
+    for node in nodes:
+        node_view = build_view_for_node(
+            node.get('value'),
+            node.get('children'),
+            indent,
+        )
+
+        key = node.get('key')
+        marked_indent = get_marked_indent(node.get('diff_type'), indent)
+        result_view = f'{result_view}{marked_indent}{key}: {node_view}\n'
+
+    return f'{result_view}{indent}}}'
+
+
+def build_view_for_node(value, children, indent):
+    """
+    Build view for difference node.
+
+    Args:
+        value: node's value
+        children: children
+        indent: indent for current depth's level
+
+    Returns:
+        str
+    """
+    indent_next_level = f'{indent}    '
+    if isinstance(value, dict):
+        node_view = build_view_for_value(value, indent_next_level)
+    elif children is not None:
+        node_view = build_view_for_children(children, indent_next_level)
+    else:
+        node_view = str(value)
+    return node_view
+
+
+def get_marked_indent(diff_type: str, indent: str) -> str:
+    """
+    Get string indent for difference type.
+
+    Args:
+        diff_type: difference type
+        indent: indent for current depth's level
+
+    Returns:
+        str
+    """
     if diff_type == 'added':
-        return '  + '   
-    if diff_type == 'removed':
-        return '  - '
-    return '    '
+        indent_suffix = '  + '
+    elif diff_type == 'removed':
+        indent_suffix = '  - '
+    else:
+        indent_suffix = '    '
+
+    return f'{indent}{indent_suffix}'
 
 
-def show_value_dict(dict_: dict, tab):
-    result = '{\n'
-    for key, value in dict_.items():
-        new_tab = tab + '    '
+def build_view_for_value(value_node: dict, indent) -> str:
+    """
+    Build view for dict value.
+
+    Value with 'dict' type  output 'as is'.
+    Function called recursively.
+
+    Args:
+        value_node: value with 'dict' type
+        indent: indent for current depth's level
+
+    Returns:
+        str
+    """
+    result_view = '{\n'
+    for key, value in value_node.items():
+        indent_next_level = f'{indent}    '
+
         if isinstance(value, dict):
-            result = result + new_tab + key + ': ' + show_value_dict(value, new_tab) + '\n'
+            node_view = build_view_for_value(value, indent_next_level)
         else:
-            result = result + new_tab + key + ': ' + str(value) + '\n'
+            node_view = str(value)
+        result_view = f'{result_view}{indent_next_level}{key}: {node_view}\n'
 
-    result = result + tab + '}'
-    return result
-
+    return f'{result_view}{indent}}}'
 
 
 __all__ = ['generate_view']
