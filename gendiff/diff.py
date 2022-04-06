@@ -1,9 +1,12 @@
 """Generate difference."""
 
 
-def generate_diff_dicts(dict1: str, dict2: str) -> str:
+from typing import Any
+
+
+def generate_diff_internal(dict1: str, dict2: str) -> str:
     """
-    Generate differences between two dictionaries.
+    Generate differences between two dictionaries in internal representation.
 
     Args:
         dict1: first dictionary
@@ -18,19 +21,11 @@ def generate_diff_dicts(dict1: str, dict2: str) -> str:
         value2 = dict2.get(key)
 
         if isinstance(value1, dict) and isinstance(value2, dict):
-            children = generate_diff_dicts(value1, value2)
-            diff.append(build_node(key, children))
+            diff_for_children = generate_diff_internal(value1, value2)
+            diff.append(build_node(key, diff_for_children))
             continue
 
-        if value1 == value2:
-            diff.append(build_least(key, value1, 'equal'))
-            continue
-
-        if value1 is not None:
-            diff.append(build_least(key, value1, 'removed'))
-
-        if value2 is not None:
-            diff.append(build_least(key, value2, 'added'))
+        diff.extend(generate_diff_for_key(key, value1, value2))
 
     return diff
 
@@ -54,26 +49,57 @@ def get_keys_from_dicts(*dicts: dict) -> list:
     return keys
 
 
-def build_least(item_key: str, item_value: str, diff_type: str) -> dict:
+def build_node(node_key: str, node_children: list) -> dict:
     """
-    Build difference item as dict.
+    Build node with differences.
 
     Args:
-        item_key: key
-        item_value: value
+        node_key: key for node
+        node_children: children for node
+
+    Returns:
+        dict
+    """
+    return {'key': node_key, 'children': node_children}
+
+
+def generate_diff_for_key(key: str, value1: Any, value2: Any) -> list:
+    """
+    Generate difference for key.
+
+    Args:
+        key: keys for which the difference is generated
+        value1: value from first dict
+        value2: value from second dict
+
+    Returns:
+        str
+    """
+    diff = []
+    if value1 == value2:
+        diff.append(build_least(key, value1, 'equal'))
+        return diff
+
+    if value1 is not None:
+        diff.append(build_least(key, value1, 'removed'))
+    if value2 is not None:
+        diff.append(build_least(key, value2, 'added'))
+    return diff
+
+
+def build_least(least_key: str, least_value: str, diff_type: str) -> dict:
+    """
+    Build least with difference.
+
+    Args:
+        least_key: key for least
+        least_value: value for least
         diff_type: type of difference (equal, added, removed)
 
     Returns:
         dict
     """
-    return {'key': item_key, 'value': item_value, 'diff_type': diff_type}
+    return {'key': least_key, 'value': least_value, 'diff_type': diff_type}
 
 
-def build_node(item_key: str, children: list) -> dict:
-
-    return {'key': item_key, 'children': children}
-
-
-
-
-__all__ = ['generate_diff_dicts']
+__all__ = ['generate_diff_internal']
