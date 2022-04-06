@@ -1,4 +1,4 @@
-"""Tools for parsing."""
+"""Parse files."""
 
 import json
 import os
@@ -27,9 +27,7 @@ def parse_file(file_path: str) -> dict:
     parse_function = suported_formats[file_extension]
 
     file_data = parse_function(file_path)
-    result = dict(map(convert_bool_value_to_str, file_data.items()))
-    print(result)
-    return result
+    return dict(map(convert_bad_types, file_data.items()))
 
 
 def parse_json(file_path: str) -> dict:
@@ -65,13 +63,16 @@ def parse_yaml(file_path: str) -> dict:
 
     return yaml_as_dict
 
-# TODO: Its hack. Need to refact
-def convert_bool_value_to_str(dict_item: tuple) -> tuple:
-    """
-    Convert bool values in dictionary's item to str in lower case.
 
-    Convert bool values in True and False to string 'true' and 'false',
-    otherwise return initial value
+def convert_bad_types(dict_item: tuple) -> tuple:
+    """
+    Convert some types in specific way.
+
+    Its small hack.
+    Some types must be converted in a different way than the default.
+
+    Convert bool values in True and False to string 'true' and 'false'.
+    Convert None to string 'null'.
 
     Args:
         dict_item: dictionary's item (tuple)
@@ -85,9 +86,9 @@ def convert_bool_value_to_str(dict_item: tuple) -> tuple:
 
     elif dict_value is None:
         dict_value = 'null'
-         
+
     elif isinstance(dict_value, dict):
-        dict_value = dict(map(convert_bool_value_to_str, dict_value.items()))
+        dict_value = dict(map(convert_bad_types, dict_value.items()))
 
     return dict_key, dict_value
 
