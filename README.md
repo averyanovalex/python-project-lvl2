@@ -23,3 +23,6 @@ This project was built using these tools:
 
 ### diff yaml files
 [![asciicast](https://asciinema.org/a/lgdulDWM39LJJjfgLcb6rr3VZ.svg)](https://asciinema.org/a/lgdulDWM39LJJjfgLcb6rr3VZ)
+
+### diff multi-level json files
+[![asciicast](https://asciinema.org/a/Xs7fNjY5rxT1jyTFO9TK8OQxd.svg)](https://asciinema.org/a/Xs7fNjY5rxT1jyTFO9TK8OQxd)

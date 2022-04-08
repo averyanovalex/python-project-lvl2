@@ -4,7 +4,6 @@
 import argparse
 
 from gendiff import generate_diff
-from gendiff.parse import parse as parse_file
 
 
 def main() -> None:
@@ -20,9 +19,10 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    file1 = parse_file(args.first_file)
-    file2 = parse_file(args.second_file)
-    print(generate_diff(file1, file2))
+    supported_formats = {'stylish'}
+    view_format = args.format if args.format in supported_formats else 'stylish'
+
+    print(generate_diff(args.first_file, args.second_file, view_format))
 
 
 if __name__ == '__main__':
