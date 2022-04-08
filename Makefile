@@ -33,7 +33,7 @@ gendiff: # run gendiff without arguments
 	poetry run gendiff
 
 gendiff_json: # run gendiff for 2 json files
-	poetry run gendiff 	'tests/fixtures/file1.json' 'tests/fixtures/file2.json'
+	poetry run gendiff 	'tests/fixtures/file1.json' 'tests/fixtures/file2.json' --format stylish
 
 gendiff_json_complex: # run gendiff for 2 json files (complex structure)
 	poetry run gendiff 	'tests/fixtures/file_complex1.json' 'tests/fixtures/file_complex2.json'

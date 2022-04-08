@@ -36,7 +36,7 @@ def run_test_gendiff(
     """
     with open(result_path) as stream:
         estimated_result = stream.read()
-    assert generate_diff(file1_path, file2_path) == estimated_result
+    assert generate_diff(file1_path, file2_path, 'stylish') == estimated_result
 
 
 def test_gendiff_json_both_full() -> None:
