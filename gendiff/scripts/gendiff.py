@@ -19,7 +19,10 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    print(generate_diff(args.first_file, args.second_file))
+    supported_formats = {'stylish'}
+    view_format = args.format if args.format in supported_formats else 'stylish'
+
+    print(generate_diff(args.first_file, args.second_file, view_format))
 
 
 if __name__ == '__main__':

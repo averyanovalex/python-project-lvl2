@@ -1,4 +1,4 @@
-"""Generate view."""
+"""Formater stylish."""
 
 
 def generate_view(difference: list) -> str:
