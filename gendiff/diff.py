@@ -77,29 +77,43 @@ def generate_diff_for_key(key: str, value1: Any, value2: Any) -> list:
     """
     diff = []
     if value1 == value2:
-        diff.append(build_least(key, value1, 'equal'))
+        diff.append(build_least(key, value1, value2, 'equal'))
         return diff
 
-    if value1 is not None:
-        diff.append(build_least(key, value1, 'removed'))
-    if value2 is not None:
-        diff.append(build_least(key, value2, 'added'))
+    if value1 is not None and value2 is not None:
+        diff.append(build_least(key, value1, value2, 'updated'))
+    elif value1 is not None:
+        diff.append(build_least(key, value1, None, 'removed'))
+    elif value2 is not None:
+        diff.append(build_least(key, None, value2, 'added'))
+
     return diff
 
 
-def build_least(least_key: str, least_value: str, diff_type: str) -> dict:
+def build_least(
+    key: str,
+    value_old: str,
+    value_new: str,
+    diff_type: str,
+) -> dict:
     """
     Build least with difference.
 
     Args:
-        least_key: key for least
-        least_value: value for least
-        diff_type: type of difference (equal, added, removed)
+        key: key for least
+        value_old: old value for least
+        value_new: new value for least
+        diff_type: type of difference (equal, added, removed, updated)
 
     Returns:
         dict
     """
-    return {'key': least_key, 'value': least_value, 'diff_type': diff_type}
+    return {
+        'key': key,
+        'value_old': value_old,
+        'value_new': value_new,
+        'diff_type': diff_type,
+    }
 
 
 __all__ = ['generate_diff_internal']
