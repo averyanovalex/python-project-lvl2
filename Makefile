@@ -20,7 +20,7 @@ test: # run tests
 
 onetest: # run one tests
 	clear
-	poetry run pytest tests/test_gendiff.py::test_gendiff_yaml_both_full_complex
+	poetry run pytest tests/test_gendiff.py::test_gendiff_json_both_full_complex_plain
 
 check: # run linter and tests
 	poetry run flake8 gendiff tests
