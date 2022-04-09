@@ -44,4 +44,7 @@ gendiff_yaml: # run gendiff for 2 yaml files
 gendiff_yaml_complex: # run gendiff for 2 yaml files
 	poetry run gendiff 	'tests/fixtures/file_complex1.yaml' 'tests/fixtures/file_complex2.yaml'
 
+gendiff_json_plain: # run gendiff for 2 json files (complex structure, format: plain)
+	poetry run gendiff 	--format plain 'tests/fixtures/file_complex1.json' 'tests/fixtures/file_complex2.json'
+
 .PHONY: gendiff
