@@ -2,6 +2,8 @@
 
 from gendiff import generate_diff
 
+format_stylish = 'stylish'
+
 file1_json = 'tests/fixtures/file1.json'
 file2_json = 'tests/fixtures/file2.json'
 file_empty_json = 'tests/fixtures/file_empty.json'
@@ -25,6 +27,7 @@ def run_test_gendiff(
     result_path: str,
     file1_path: str,
     file2_path: str,
+    format_name: str,
 ) -> None:
     """
     Execute common logic for all tests.
@@ -33,13 +36,15 @@ def run_test_gendiff(
         result_path: path to eatimated result
         file1_path: path to first file
         file2_path: path to second file
+        format_name: view format name
     """
     with open(result_path) as stream:
         estimated_result = stream.read()
-    assert generate_diff(file1_path, file2_path, 'stylish') == estimated_result
+    diff = generate_diff(file1_path, file2_path, format_name)
+    assert diff == estimated_result
 
 
-def test_gendiff_json_both_full() -> None:
+def test_gendiff_json_both_full_stylish() -> None:
     """
     Tests generate_diff when both arguments are json files.
 
@@ -49,10 +54,11 @@ def test_gendiff_json_both_full() -> None:
         result_path=result_both_full,
         file1_path=file1_json,
         file2_path=file2_json,
+        format_name=format_stylish,
     )
 
 
-def test_gendiff_json_one_empty() -> None:
+def test_gendiff_json_one_empty_stylish() -> None:
     """
     Tests generate_diff when both arguments are json files.
 
@@ -62,10 +68,11 @@ def test_gendiff_json_one_empty() -> None:
         result_path=result_one_empty,
         file1_path=file_empty_json,
         file2_path=file2_json,
+        format_name=format_stylish,
     )
 
 
-def test_gendiff_json_both_equal() -> None:
+def test_gendiff_json_both_equal_stylish() -> None:
     """
     Tests generate_diff when both arguments are json files.
 
@@ -75,10 +82,11 @@ def test_gendiff_json_both_equal() -> None:
         result_path=result_both_equal,
         file1_path=file1_json,
         file2_path=file1_json,
+        format_name=format_stylish,
     )
 
 
-def test_gendiff_json_both_empty() -> None:
+def test_gendiff_json_both_empty_stylish() -> None:
     """
     Tests generate_diff when both arguments are json files.
 
@@ -88,10 +96,11 @@ def test_gendiff_json_both_empty() -> None:
         result_path=result_both_empty,
         file1_path=file_empty_json,
         file2_path=file_empty_json,
+        format_name=format_stylish,
     )
 
 
-def test_gendiff_json_both_full_complex() -> None:
+def test_gendiff_json_both_full_complex_stylish() -> None:
     """
     Tests generate_diff when both arguments are json files (complex structure).
 
@@ -101,10 +110,11 @@ def test_gendiff_json_both_full_complex() -> None:
         result_path=result_both_full_complex,
         file1_path=file1_complex_json,
         file2_path=file2_complex_json,
+        format_name=format_stylish,
     )
 
 
-def test_gendiff_yaml_both_full() -> None:
+def test_gendiff_yaml_both_full_stylish() -> None:
     """
     Tests generate_diff when both arguments are yaml files.
 
@@ -114,10 +124,11 @@ def test_gendiff_yaml_both_full() -> None:
         result_path=result_both_full,
         file1_path=file1_yaml,
         file2_path=file2_yaml,
+        format_name=format_stylish,
     )
 
 
-def test_gendiff_yaml_one_empty() -> None:
+def test_gendiff_yaml_one_empty_stylish() -> None:
     """
     Tests generate_diff when both arguments are yaml files.
 
@@ -127,10 +138,11 @@ def test_gendiff_yaml_one_empty() -> None:
         result_path=result_one_empty,
         file1_path=file_empty_yaml,
         file2_path=file2_yaml,
+        format_name=format_stylish,
     )
 
 
-def test_gendiff_yaml_both_equal() -> None:
+def test_gendiff_yaml_both_equal_stylish() -> None:
     """
     Tests generate_diff when both arguments are yaml files.
 
@@ -140,10 +152,11 @@ def test_gendiff_yaml_both_equal() -> None:
         result_path=result_both_equal,
         file1_path=file1_yaml,
         file2_path=file1_yaml,
+        format_name=format_stylish,
     )
 
 
-def test_gendiff_yaml_both_empty() -> None:
+def test_gendiff_yaml_both_empty_stylish() -> None:
     """
     Tests generate_diff when both arguments are yaml files.
 
@@ -153,10 +166,11 @@ def test_gendiff_yaml_both_empty() -> None:
         result_path=result_both_empty,
         file1_path=file_empty_yaml,
         file2_path=file_empty_yaml,
+        format_name=format_stylish,
     )
 
 
-def test_gendiff_yaml_both_full_complex() -> None:
+def test_gendiff_yaml_both_full_complex_stylish() -> None:
     """
     Tests generate_diff when both arguments are yaml files (complex structure).
 
@@ -166,4 +180,5 @@ def test_gendiff_yaml_both_full_complex() -> None:
         result_path=result_both_full_complex,
         file1_path=file1_complex_yaml,
         file2_path=file2_complex_yaml,
+        format_name=format_stylish,
     )

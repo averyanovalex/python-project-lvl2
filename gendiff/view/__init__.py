@@ -3,7 +3,7 @@
 from gendiff.view import stylish as formater_stylish
 
 
-def generate_view(difference: list, view_format: str) -> str:
+def generate_view(difference: list, format_name: str) -> str:
     """
     Generate view for difference.
 
@@ -13,14 +13,14 @@ def generate_view(difference: list, view_format: str) -> str:
 
     Args:
         difference: difference between two files (internal representation)
-        view_format: format for view
+        format_name: format for view
 
     Returns:
         str
     """
     formaters = {'stylish': formater_stylish}
-    formater = formaters.get(view_format)
-    assert formater is not None, f'Format "{view_format}" is not supported.'
+    formater = formaters.get(format_name)
+    assert formater is not None, f'Format "{format_name}" is not supported.'
 
     return formater.generate_view(difference)
 
