@@ -1,5 +1,6 @@
 """View generator. Support different formats."""
 
+from gendiff.view import plain as formater_plain
 from gendiff.view import stylish as formater_stylish
 
 
@@ -18,7 +19,11 @@ def generate_view(difference: list, format_name: str) -> str:
     Returns:
         str
     """
-    formaters = {'stylish': formater_stylish}
+    formaters = {
+        'stylish': formater_stylish,
+        'plain': formater_plain,
+    }
+
     formater = formaters.get(format_name)
     assert formater is not None, f'Format "{format_name}" is not supported.'
 

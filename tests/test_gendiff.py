@@ -130,7 +130,7 @@ def test_gendiff_json_both_full_complex_plain() -> None:
     Format name: plain.
     """
     run_test_gendiff(
-        result_path=stylish_both_full_complex,
+        result_path=plain_both_full_complex,
         file1_path=file1_complex_json,
         file2_path=file2_complex_json,
         format_name=format_plain,
