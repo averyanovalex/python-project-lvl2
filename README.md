@@ -18,11 +18,14 @@ This project was built using these tools:
 
 
 ## How it works
-### diff json files
+### diff json files (format: stylish)
 [![asciicast](https://asciinema.org/a/tYKB33ydwG1KVI1MQL78yNkx7.svg)](https://asciinema.org/a/tYKB33ydwG1KVI1MQL78yNkx7)
 
-### diff yaml files
+### diff yaml files (format: stylish)
 [![asciicast](https://asciinema.org/a/lgdulDWM39LJJjfgLcb6rr3VZ.svg)](https://asciinema.org/a/lgdulDWM39LJJjfgLcb6rr3VZ)
 
-### diff multi-level json files
+### diff multi-level json files (format: stylish)
 [![asciicast](https://asciinema.org/a/Xs7fNjY5rxT1jyTFO9TK8OQxd.svg)](https://asciinema.org/a/Xs7fNjY5rxT1jyTFO9TK8OQxd)
+
+### diff multi-levell json files (format: plain)
+[![asciicast](https://asciinema.org/a/ZGFlqDg5TnqtK07YTKgJs0V3b.svg)](https://asciinema.org/a/ZGFlqDg5TnqtK07YTKgJs0V3b)
