@@ -133,4 +133,7 @@ def build_value_text(value: Any) -> str:
     if value is None:
         return 'null'
 
-    return "'{0}'".format(str(value))
+    if isinstance(value, str):
+        return "'{0}'".format(str(value))
+
+    return str(value)
