@@ -37,7 +37,7 @@ To install project:
 
 5.Run game:
 
-`gendiff file1 file2 [--format stylish | --format json | format plain]`
+`gendiff file1 file2 [--format stylish | --format json | --format plain]`
 
 or see how it works.
 
