@@ -1,4 +1,4 @@
-"""Module tests package gendiff for json  files."""
+"""Module tests package gendiff."""
 
 from gendiff import generate_diff
 
