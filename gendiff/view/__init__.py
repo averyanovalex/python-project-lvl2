@@ -27,6 +27,8 @@ def generate_view(difference: list, format_name: str) -> str:
     }
 
     formater = formaters.get(format_name)
+    formater = formater_stylish if formater is None else formater
+
     assert formater is not None, f'Format "{format_name}" is not supported.'
 
     return formater.generate_view(difference)
