@@ -20,7 +20,7 @@ test: # run tests
 
 onetest: # run one tests
 	clear
-	poetry run pytest tests/test_gendiff.py::test_gendiff_json_both_full_complex_plain
+	poetry run pytest tests/test_hexlet.py::test_json_plain
 
 check: # run linter and tests
 	poetry run flake8 gendiff tests
@@ -49,5 +49,8 @@ gendiff_json_plain: # run gendiff for 2 json files (complex structure, format: p
 
 gendiff_json_json: # run gendiff for 2 json files (complex structure, format: json)
 	poetry run gendiff 	--format json 'tests/fixtures/file_complex1.json' 'tests/fixtures/file_complex2.json'
+
+hexlet: # run hexlet files
+	poetry run gendiff 	--format plain 'tests/fixtures/hexlet/file1.json' 'tests/fixtures/hexlet/file2.json'
 
 .PHONY: gendiff
