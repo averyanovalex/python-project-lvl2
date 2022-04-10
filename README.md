@@ -29,3 +29,6 @@ This project was built using these tools:
 
 ### diff multi-levell json files (format: plain)
 [![asciicast](https://asciinema.org/a/ZGFlqDg5TnqtK07YTKgJs0V3b.svg)](https://asciinema.org/a/ZGFlqDg5TnqtK07YTKgJs0V3b)
+
+### diff multi-level json files (format: json)
+[![asciicast](https://asciinema.org/a/stSYVA4PPSTNTSqaTG7l6wEGN.svg)](https://asciinema.org/a/stSYVA4PPSTNTSqaTG7l6wEGN)
