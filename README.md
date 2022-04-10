@@ -15,7 +15,31 @@ This project was built using these tools:
 |-----------------------------------------------------------------------------|----------------------------------------------------|
 | [poetry](https://poetry.eustace.io/)                                        | "Python dependency management packaging made easy" |
 
+##  Install
 
+To install project:
+
+1.Install Poetry (instruction: `https://poetry.eustace.io/`)
+
+2.Clone repository:
+
+`git clone git@github.com:averyanovalex/python-project-lvl1.git`
+
+3.Install dependencies:
+
+`poetry install` (or `make install`)
+
+4.Build and install package:
+
+`poetry build` (or `make build`)
+
+`python3 -m pip install --user dist/*.whl` (or `make package-install`)
+
+5.Run game:
+
+`gendiff file1 file2 [--format stylish | --format json | format plain]`
+
+or see how it works.
 
 ## How it works
 ### diff json files (format: stylish)
