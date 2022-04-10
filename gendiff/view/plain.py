@@ -127,7 +127,10 @@ def build_value_text(value: Any) -> str:
     if isinstance(value, dict):
         return '[complex value]'
 
-    if value in {'true', 'false', 'null'}:
-        return str(value)
+    if isinstance(value, bool):
+        return str(value).lower()
+
+    if value is None:
+        return 'null'
 
     return "'{0}'".format(str(value))

@@ -4,6 +4,7 @@ from gendiff import generate_diff
 
 format_stylish = 'stylish'
 format_plain = 'plain'
+format_json = 'json'
 
 file1_json = 'tests/fixtures/file1.json'
 file2_json = 'tests/fixtures/file2.json'
@@ -24,6 +25,7 @@ stylish_both_empty = 'tests/fixtures/stylish_simple_both_empty.txt'
 stylish_both_full_complex = 'tests/fixtures/stylish_complex_both_full.txt'
 
 plain_both_full_complex = 'tests/fixtures/plain_complex_both_full.txt'
+json_both_full_complex = 'tests/fixtures/json_complex_both_full.txt'
 
 
 def run_test_gendiff(
@@ -122,21 +124,6 @@ def test_gendiff_json_both_full_complex_stylish() -> None:
     )
 
 
-def test_gendiff_json_both_full_complex_plain() -> None:
-    """
-    Tests generate_diff when both arguments are json files (complex structure).
-
-    Both files are full and different.
-    Format name: plain.
-    """
-    run_test_gendiff(
-        result_path=plain_both_full_complex,
-        file1_path=file1_complex_json,
-        file2_path=file2_complex_json,
-        format_name=format_plain,
-    )
-
-
 def test_gendiff_yaml_both_full_stylish() -> None:
     """
     Tests generate_diff when both arguments are yaml files.
@@ -209,4 +196,34 @@ def test_gendiff_yaml_both_full_complex_stylish() -> None:
         file1_path=file1_complex_yaml,
         file2_path=file2_complex_yaml,
         format_name=format_stylish,
+    )
+
+
+def test_gendiff_json_both_full_complex_plain() -> None:
+    """
+    Tests generate_diff when both arguments are json files (complex structure).
+
+    Both files are full and different.
+    Format name: plain.
+    """
+    run_test_gendiff(
+        result_path=plain_both_full_complex,
+        file1_path=file1_complex_json,
+        file2_path=file2_complex_json,
+        format_name=format_plain,
+    )
+
+
+def test_gendiff_json_both_full_complex_json() -> None:
+    """
+    Tests generate_diff when both arguments are json files (complex structure).
+
+    Both files are full and different.
+    Format name: json.
+    """
+    run_test_gendiff(
+        result_path=json_both_full_complex,
+        file1_path=file1_complex_json,
+        file2_path=file2_complex_json,
+        format_name=format_json,
     )
