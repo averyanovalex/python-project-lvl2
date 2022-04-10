@@ -1,4 +1,3 @@
-### Hexlet tests and linter status:
 [![Actions Status](https://github.com/averyanovalex/python-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/averyanovalex/python-project-lvl2/actions)
 [![example workflow](https://github.com/averyanovalex/python-project-lvl2/actions/workflows/ci.yml/badge.svg)](https://github.com/averyanovalex/python-project-lvl2/actions/workflows/ci.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/fe5aebec8abc8f6154c7/maintainability)](https://codeclimate.com/github/averyanovalex/python-project-lvl2/maintainability)
