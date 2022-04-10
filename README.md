@@ -22,7 +22,7 @@ To install project:
 
 2.Clone repository:
 
-`git clone git@github.com:averyanovalex/python-project-lvl1.git`
+`git clone git@github.com:averyanovalex/python-project-lvl2.git`
 
 3.Install dependencies:
 
