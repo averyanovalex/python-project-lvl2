@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "Difference generator"
+name = "hexlet-code"
 version = "1.0.0"
 description = "Training project 'Difference generator' on hexlet.io"
 authors = ["Alexey Averyanov <averyanovalexey@gmail.com>"]
