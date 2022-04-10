@@ -1,9 +1,6 @@
 """Generate difference."""
 
 
-from typing import Any
-
-
 def generate_diff_internal(dict1: str, dict2: str) -> str:
     """
     Generate differences between two dictionaries in internal representation.
@@ -25,7 +22,7 @@ def generate_diff_internal(dict1: str, dict2: str) -> str:
             diff.append(build_node(key, diff_for_children))
             continue
 
-        diff.extend(generate_diff_for_key(key, value1, value2))
+        diff.extend(generate_diff_for_key(key, dict1, dict2))
 
     return diff
 
@@ -63,29 +60,34 @@ def build_node(node_key: str, node_children: list) -> dict:
     return {'key': node_key, 'children': node_children}
 
 
-def generate_diff_for_key(key: str, value1: Any, value2: Any) -> list:
+def generate_diff_for_key(key: str, dict1: dict, dict2: dict) -> list:
     """
     Generate difference for key.
 
     Args:
         key: keys for which the difference is generated
-        value1: value from first dict
-        value2: value from second dict
+        dict1: first dict
+        dict2: second dict
 
     Returns:
         str
     """
     diff = []
+    dict1_has_key = key in dict1
+    dict2_has_key = key in dict2
+
+    if dict1_has_key and not dict2_has_key:
+        diff.append(build_least(key, dict1.get(key), None, 'removed'))
+
+    if not dict1_has_key and dict2_has_key:
+        diff.append(build_least(key, None, dict2.get(key), 'added'))
+
+    value1 = dict1.get(key)
+    value2 = dict2.get(key)
     if value1 == value2:
         diff.append(build_least(key, value1, value2, 'equal'))
-        return diff
-
-    if value1 is not None and value2 is not None:
+    elif dict1_has_key and dict2_has_key:
         diff.append(build_least(key, value1, value2, 'updated'))
-    elif value1 is not None:
-        diff.append(build_least(key, value1, None, 'removed'))
-    elif value2 is not None:
-        diff.append(build_least(key, None, value2, 'added'))
 
     return diff
 

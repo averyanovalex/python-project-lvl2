@@ -129,7 +129,7 @@ def build_view_for_node(
     if isinstance(value, dict):
         node_view = build_view_for_dict_value(value, new_indent)
     else:
-        node_view = str(value)
+        node_view = build_view_for_simple_value(value)
 
     marked_indent = get_marked_indent(diff_type, indent)
     return f'{result_view}{marked_indent}{key}: {node_view}\n'
@@ -160,6 +160,25 @@ def build_view_for_dict_value(node_value: dict, indent) -> str:
         result_view = f'{result_view}{indent_next_level}{key}: {node_view}\n'
 
     return f'{result_view}{indent}}}'
+
+
+def build_view_for_simple_value(value: Any) -> str:
+    """
+    Build view for simple value (not dict type).
+
+    Args:
+        value: value
+
+    Returns:
+        str
+    """
+    if isinstance(value, bool):
+        return str(value).lower()
+
+    if value is None:
+        return 'null'
+
+    return str(value)
 
 
 def get_marked_indent(diff_type: str, indent: str) -> str:
